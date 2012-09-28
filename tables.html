@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="jquery-1.8.2.min.js"></script>
+    <script type="text/javascript">
+        // page ready handler
+        $(function() {
+            // listen for click on the button
+            $("#toTwoButton").bind("click", function(event) {
+                // get all of the td elements inside of the table with an id = 'onecol'
+                var origTds = $("#onecol td")
+                
+                // create a new table
+                var newTable = $("<table>")
+                
+                // adjust origTds so that it has an even number of elements
+                if ((origTds.size() % 2) != 0) {
+                    origTds.push($("<td>"))
+                }
+                
+                // loop through all of the original td elements and move them to the new table
+                while (origTds.size() >0) {
+                    // create a new row
+                    var newRow = $("<tr>")
+                    newTable.append(newRow)
+                    
+                    // for each row (two td elements), add them to the newRow
+                    $.each(origTds.splice(0, 2), function(index, item) {
+                        newRow.append(item)
+                    })
+                }
+                
+                // add the table to the page
+                $("body").prepend(newTable)
+                
+                // remove the old table
+                $("#onecol").detach()
+                
+                // hide the button
+                $("#toTwoButton").hide()
+            })
+        })
+    </script>
+    <style>
+        table, td {
+            border-style: solid;
+            border-width: 1px;
+        }
+    </style>
+</head>
+<body>
+    <table id="onecol">
+        <tr>
+            <td>One</td>
+        </tr>
+        <tr>
+            <td>Two</td>
+        </tr>
+        <tr>
+            <td>Three</td>
+        </tr>
+        <tr>
+            <td>Four</td>
+        </tr>
+        <tr>
+            <td>Five</td>
+        </tr>
+        <tr>
+            <td>Six</td>
+        </tr>
+        <tr>
+            <td>Seven</td>
+        </tr>
+    </table>
+    <button id="toTwoButton">Utah, Gimme Two!</button>
+</body>
+</html>
